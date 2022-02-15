@@ -56,4 +56,78 @@ number.unshift(100);
 number.pop();
 console.log(number);
 console.log(number.removeFirstPosition());
-console.log(number.shift());
+console.log(number.splice(1,0,10, 20));
+console.log(number);
+
+const matrix3x3x3 = [ [ [1,2,3], [4,5,6], [7,8,9] ], [ [10, 11, 12], [13, 14, 15], [16, 17, 18] ], [ [19, 20, 21], [22, 23, 24], [24, 25, 26] ]];
+
+const matrix = [ [ 1,2,3 ], [4,5,6 ] ]
+for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+        console.log("Matrix", matrix[i][j]);
+    } 
+}
+
+for (let i = 0; i < matrix3x3x3.length; i++) {
+    for (let j = 0; j < matrix3x3x3[i].length; j++) {
+        for (let k = 0; k < matrix3x3x3[i][j].length; k++) {
+            console.log("Matrix 3x3x3", matrix3x3x3[i][j][k]);
+        }
+    } 
+}
+
+const a = [0];
+
+console.log(a, a.concat(10, 20), a);
+
+
+function isEven(x : number): boolean {
+    console.log(x);
+    return x % 2 === 0;
+}
+
+const numbers = [0, 1, 2, 3, 4, 5, 6];
+
+console.log(number.every(isEven))
+console.log(number.some(isEven))
+const map = numbers.map(isEven);
+const filter = numbers.filter(isEven);
+
+number.forEach(( value ) => console.log(value))
+console.log(map)
+console.log(filter)
+console.log(numbers.reduce((previous, current) => previous + current));
+
+for(const n of numbers) {
+    console.log(n)
+}
+
+let iterator = numbers[Symbol.iterator]();
+console.log(iterator.next().value);
+let entries = numbers.entries();
+console.log(entries.next().value)
+let keys = numbers.keys();
+console.log(keys.next())
+let values = numbers.values();
+console.log(values.next())
+Array.from(numbers);
+Array.of(1);
+let b : number[] = [1];
+console.log(b.fill(0));
+console.log(number.copyWithin(0,3))
+console.log("Sort", numbers.reverse().sort())
+numbers.sort((a,b) => a - b);
+console.log(numbers.indexOf(6))
+
+function multipleOf13(element : number, index: number, array: number[]) {
+    return element % 13 === 0;
+}
+
+console.log(numbers.find(multipleOf13))
+
+console.log(numbers.includes(6))
+console.log(numbers.join('-'))
+
+const teste = new Int16Array(10);
+
+console.log(teste)
