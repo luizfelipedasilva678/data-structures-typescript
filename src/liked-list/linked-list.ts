@@ -1,151 +1,148 @@
-import { defaultEquals } from "../utils";
+import { defaultEquals } from '../utils';
 import { Node } from './models/linked-list-models';
 
-interface EqualFunctionProtocol<T> {
-    (a: T, b: T) : boolean;
+export interface EqualFunctionProtocol<T> {
+  (a: T, b: T): boolean;
 }
 
 export default class LinkedList<T> {
-    private count : number = 0;
-    private head : Node<T> | undefined = undefined;
-    private equalsFn : EqualFunctionProtocol<T>;
+  protected count: number = 0;
 
-    constructor(equalfn = defaultEquals) {
-        this.equalsFn = equalfn;
+  protected head: Node<T> | undefined = undefined;
+
+  protected equalsFn: EqualFunctionProtocol<T>;
+
+  constructor(equalfn = defaultEquals) {
+    this.equalsFn = equalfn;
+  }
+
+  push(element: T) {
+    const node = new Node<T>(element);
+    let current: Node<T>;
+
+    if (this.head === undefined) {
+      this.head = node;
+    } else {
+      current = this.head;
+      while (current.next !== undefined) {
+        current = current.next;
+      }
+      current.next = node;
     }
 
-    push(element : T) {
-        const node = new Node<T>(element);
-        let current : Node<T>;
-        
-        if(this.head === undefined) {
-            this.head = node;
-        } else {
-            current = this.head;
-            while(current.next !== undefined) {
-                current = current.next;
-            }
-            current.next = node;
+    this.count++;
+  }
+
+  removeAt(index: number) {
+    if (index >= 0 && index < this.count) {
+      let current = this.head;
+
+      if (index === 0) {
+        this.head = current?.next;
+      } else {
+        let previous: Node<T> | undefined;
+
+        for (let i = 0; i < index; i++) {
+          previous = current;
+          current = current?.next;
         }
 
-        this.count++;
+        if (previous !== undefined) previous.next = current?.next;
+      }
+
+      this.count--;
+
+      if (current !== undefined) return current.element;
     }
 
-    removeAt(index : number) {
-        if(index >= 0 && index < this.count) {
-            let current = this.head;
+    return undefined;
+  }
 
-            if(index === 0) {
-                this.head = current?.next;
-            } else {
-                let previous : Node<T> | undefined;
+  getElementAt(index: number) {
+    if (index >= 0 && index <= this.count) {
+      let node = this.head;
 
-                for(let i = 0; i < index; i++) {
-                    previous = current;
-                    current = current?.next;
-                }
+      for (let i = 0; i < index && node != null; i++) {
+        node = node.next;
+      }
 
-                if(previous !== undefined)
-                    previous.next = current?.next;
-            }
-
-            this.count--;
-
-            if(current !== undefined)
-                return current.element;
-        }
-
-        return undefined;
+      return node;
     }
 
-    getElementAt(index : number) {
-        if(index >= 0 && index <= this.count) {
-            let node = this.head;
+    return undefined;
+  }
 
-            for(let i = 0; i < index && node != null; i++) {
-                node = node.next;
-            }
+  insert(element: T, index: number) {
+    if (index >= 0 && index <= this.count) {
+      const node = new Node(element);
 
-            return node;
-        }
+      if (index === 0) {
+        const current = this.head;
+        node.next = current;
+        this.head = current;
+      } else {
+        const previous = this.getElementAt(index - 1);
+        const current = previous?.next;
+        node.next = current;
 
-        return undefined;
+        if (previous !== undefined) previous.next = node;
+      }
+
+      this.count++;
+      return true;
     }
 
-    insert(element : T, index : number) {
-        if(index >= 0 && index <= this.count) {
-            const node = new Node(element);
+    return false;
+  }
 
-            if(index === 0) {
-                const current = this.head;
-                node.next = current;
-                this.head = current;
-            } else {
-                const previous = this.getElementAt(index - 1);
-                const current = previous?.next;
-                node.next = current;
+  remove(element: T) {
+    const index = this.indexOf(element);
+    return this.removeAt(index);
+  }
 
-                if(previous !== undefined) 
-                    previous.next = node;
-            }
+  indexOf(element: T) {
+    let current = this.head;
+    for (let i = 0; i < this.count && current !== undefined; i++) {
+      if (this.equalsFn(element, current.element)) {
+        return i;
+      }
 
-            this.count++;
-            return true;
-        }
-
-        return false;
+      current = current.next;
     }
 
-    remove(element : T) {
-        const index = this.indexOf(element);
-        return this.removeAt(index);
+    return -1;
+  }
+
+  size() {
+    return this.count;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  getHead(): Node<T> | undefined {
+    return this.head;
+  }
+
+  toString() {
+    if (this.head === undefined) {
+      return '';
     }
 
-    indexOf(element : T) {
-        let current = this.head;
-        for(let i = 0; i < this.count && current != undefined; i++) {
-            
-            if(this.equalsFn(element, current.element)) {
-                return i;
-            }
+    let objString = `${this.head.element}`;
+    let current = this.head.next;
 
-            current = current.next;
-        }
+    for (let i = 0; i < this.size(); i++) {
+      objString = `${objString}, ${current?.element}`;
 
-        return -1;
+      if (current !== undefined) current = current.next;
     }
 
-    size() {
-        return this.count;
-    }
-
-    isEmpty() { 
-        return this.size() === 0;
-    }
-
-    getHead() : Node<T> | undefined{
-        return this.head;
-    }
-
-    toString() {
-        if(this.head === undefined) {
-            return '';
-        }
-
-        let objString = `${this.head.element}`;
-        let current = this.head.next;
-        
-        for(let i = 0; i < this.size(); i++) {
-            objString = `${objString}, ${current?.element}`;
-            
-            if(current !== undefined)
-                current = current.next;
-        }
-
-        return objString;
-    }
+    return objString;
+  }
 }
-
+/*
 const list = new LinkedList<number>();
 list.push(10);
 list.push(20);
@@ -153,3 +150,4 @@ list.push(20);
 console.log(list.getElementAt(0));
 console.log(list.indexOf(20));
 console.log(list.toString());
+*/

@@ -1,23 +1,23 @@
 export class Node<T> {
-    private _element : T;
-    private _next : Node<T> | undefined;
+  protected _element: T;
 
-    constructor(element : T) {
-        this._element = element;
-        this._next = undefined;
-    }
+  protected _next: Node<T> | undefined;
 
-    get next() : Node<T> | undefined {
-        if(this._next !== undefined)
-            return this._next;
-        return undefined;
-    }
+  constructor(element: T, next = undefined) {
+    this._element = element;
+    this._next = next;
+  }
 
-    set next(value : Node<T> | undefined) {
-        this._next = value;
-    }
+  get next(): Node<T> | undefined {
+    if (this._next !== undefined) return this._next;
+    return undefined;
+  }
 
-    get element() : T {
-        return this._element;
-    }
+  set next(value: Node<T> | undefined) {
+    this._next = value;
+  }
+
+  get element(): T {
+    return this._element;
+  }
 }

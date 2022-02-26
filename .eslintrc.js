@@ -15,5 +15,12 @@ module.exports = {
     'no-plusplus': 'off',
     'no-extend-native': 'off',
     'no-unused-vars': 'off',
+    'no-use-before-define': 'off',
+    'no-useless-constructor': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    'no-underscore-dangle': 'off',
+    'no-empty-function': 'off',
+    'import/prefer-default-export': 'off',
   },
 };
