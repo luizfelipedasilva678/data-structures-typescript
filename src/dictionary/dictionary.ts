@@ -1,7 +1,7 @@
 import { defaultToString } from '../utils';
 import ValuePair from './value-pair';
 
-interface TableValuesProtocol {
+export interface TableValuesProtocol {
   [key: string]: any;
 }
 
