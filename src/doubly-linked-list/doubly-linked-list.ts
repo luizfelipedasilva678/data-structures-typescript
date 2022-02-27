@@ -89,6 +89,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
   }
 }
 
+/*
 const doubleList = new DoublyLinkedList<number>();
 
 doubleList.push(10);
@@ -102,3 +103,4 @@ console.log(doubleList.getTail());
 console.log(doubleList.getElementAt(2));
 console.log(doubleList.removeAt(2));
 console.log(doubleList.toString());
+*/

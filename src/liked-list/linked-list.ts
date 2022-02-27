@@ -79,7 +79,7 @@ export default class LinkedList<T> {
       if (index === 0) {
         const current = this.head;
         node.next = current;
-        this.head = current;
+        this.head = node;
       } else {
         const previous = this.getElementAt(index - 1);
         const current = previous?.next;
