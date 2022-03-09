@@ -1,7 +1,7 @@
 interface DequeItem<T> {
   [key: number]: T;
 }
-
+console.log("TEste");
 export default class Deque<T> {
   private count: number = 0;
 
