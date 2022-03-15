@@ -1,12 +1,12 @@
 import LinkedList from '../liked-list/linked-list';
 import { defaultEquals } from '../utils';
 
-const Compare = {
+export const Compare = {
   LESS_THAN: -1,
   BIGGER_THAN: 1,
 };
 
-function defaultCompare<T>(a: T, b: T) {
+export function defaultCompare<T>(a: T, b: T) {
   if (a === b) {
     return 0;
   }
@@ -40,6 +40,7 @@ export default class SortedLinkedList<T> extends LinkedList<T> {
   }
 }
 
+/*
 const sortedLinkedList = new SortedLinkedList<number>();
 
 sortedLinkedList.insert(5);
@@ -49,3 +50,4 @@ sortedLinkedList.insert(2, 3);
 sortedLinkedList.insert(1, 4);
 
 console.log(sortedLinkedList.toString());
+*/
