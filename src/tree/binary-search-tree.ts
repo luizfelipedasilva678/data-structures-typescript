@@ -113,6 +113,46 @@ export default class BinarySearchTree {
 
     return true;
   }
+
+  remove(key: any) {
+    this.root = this.removeNode(this.root, key);
+  }
+
+  removeNode(node: any, key: any) {
+    if (node == null) {
+      return null;
+    }
+
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.removeNode(node.left, key);
+      return node;
+    }
+
+    if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.removeNode(node.right, key);
+      return node;
+    }
+
+    if (node.left == null && node.right == null) {
+      node = null;
+      return node;
+    }
+
+    if (node.left == null) {
+      node = node.right;
+      return node;
+    }
+
+    if (node.right == null) {
+      node = node.left;
+      return node;
+    }
+
+    const aux = this.minNode(node.right);
+    node.key = aux.key;
+    node.right = this.removeNode(node.right, aux.key);
+    return node;
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -138,4 +178,7 @@ console.log('-----');
 tree.postOrderTraverse(printfNode);
 console.log('-----');
 console.log(tree.min());
+console.log(tree.search(3));
+
+tree.remove(3);
 console.log(tree.search(3));
