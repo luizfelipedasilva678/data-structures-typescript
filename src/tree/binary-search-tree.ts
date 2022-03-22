@@ -155,6 +155,7 @@ export default class BinarySearchTree {
   }
 }
 
+/*
 const tree = new BinarySearchTree();
 tree.insert(11);
 tree.insert(7);
@@ -182,3 +183,4 @@ console.log(tree.search(3));
 
 tree.remove(3);
 console.log(tree.search(3));
+*/
