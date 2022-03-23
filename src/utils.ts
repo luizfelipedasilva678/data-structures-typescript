@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export function defaultEquals<T>(a: T, b: T) {
   return a === b;
 }
@@ -16,4 +17,10 @@ export function defaultToString(item: any) {
   }
 
   return item.toString();
+}
+
+export function swap(array: any, a: any, b: any) {
+  const temp = array[a];
+  array[a] = array[b];
+  array[b] = temp;
 }
