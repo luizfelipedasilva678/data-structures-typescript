@@ -24,3 +24,7 @@ export function swap(array: any, a: any, b: any) {
   array[a] = array[b];
   array[b] = temp;
 }
+
+export function reverseCompare(compareFn: any) {
+  return (a: any, b: any) => compareFn(b, a);
+}

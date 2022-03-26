@@ -36,7 +36,7 @@ export class MinHeap {
   }
 
   isEmpty() {
-    return this.size() <= 0;
+    return this.size() === 0;
   }
 
   clear() {
@@ -67,6 +67,46 @@ export class MinHeap {
       swap(this.heap, parent, index);
       index = parent;
       parent = this.getParentIndex(index);
+    }
+  }
+
+  extract() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+
+    if (this.size() === 1) {
+      return this.heap.shift();
+    }
+
+    const removedValue = this.heap.shift();
+    this.siftDown(0);
+    return removedValue;
+  }
+
+  siftDown(index: number) {
+    let element = index;
+    const left = this.getLeftIndex(index);
+    const right = this.getRightIndex(index);
+    const size = this.size();
+
+    if (
+      left < size &&
+      this.compareFn(this.heap[element], this.heap[left]) > Compare.BIGGER_THAN
+    ) {
+      element = left;
+    }
+
+    if (
+      right < size &&
+      this.compareFn(this.heap[element], this.heap[right]) > Compare.BIGGER_THAN
+    ) {
+      element = right;
+    }
+
+    if (index !== element) {
+      swap(this.heap, index, element);
+      this.siftDown(element);
     }
   }
 }
