@@ -1,4 +1,6 @@
 import Dictionary from '../dictionary/dictionary';
+import { breadthFirstSearch, breadthFirstSearchV2 } from '../utils';
+import Stack from '../stack/stack-array';
 
 class Graph {
   constructor(
@@ -44,7 +46,7 @@ class Graph {
       s += `${this.vertices[i]} ->`;
       const neighbors = this.adjList.get(this.vertices[i]);
       for (let j = 0; j < neighbors.length; j++) {
-        s += `${neighbors[j]}`;
+        s += ` ${neighbors[j]} `;
       }
       s += '\n';
     }
@@ -66,6 +68,27 @@ graph.addEdge('C', 'G');
 graph.addEdge('D', 'G');
 graph.addEdge('D', 'H');
 graph.addEdge('B', 'E');
+graph.addEdge('B', 'F');
 graph.addEdge('B', 'I');
+graph.addEdge('A', 'I');
 
+const printVertex = (value: any) => console.log(`Viseted vertex: ${value}`);
+
+const shortestPathA = breadthFirstSearchV2(graph, myVertices[0]);
+console.log(shortestPathA);
 console.log(graph.toString());
+
+const fromVertex = myVertices[0];
+for (let i = 1; i < myVertices.length; i++) {
+  const toVertex = myVertices[i];
+  const path = new Stack<any>();
+  for (let v = toVertex; v !== fromVertex; v = shortestPathA.predecessors[v]) {
+    path.push(v);
+  }
+  path.push(fromVertex);
+  let s = path.pop();
+  while (!path.isEmpty()) {
+    s += ` - ${path.pop()}`;
+  }
+  console.log(s);
+}

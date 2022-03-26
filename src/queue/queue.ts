@@ -62,6 +62,7 @@ export default class Queue<T> {
   }
 }
 
+/*
 const nomes = new Queue<string>();
 
 nomes.enqueue('Paulo');
@@ -72,3 +73,4 @@ nomes.enqueue('Maria');
 // nomes.dequeue();
 // console.log(nomes.peek());
 // console.log(nomes.toString());
+*/
