@@ -86,6 +86,7 @@ export default class Dictionary {
   }
 }
 
+/*
 const dictionary = new Dictionary();
 
 dictionary.set('Nome', 'Luiz');
@@ -93,3 +94,4 @@ dictionary.set('Nome do meio', 'Pedro');
 dictionary.set('Nome final', 'José');
 
 console.log(dictionary.keyValues());
+*/
