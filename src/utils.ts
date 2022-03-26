@@ -143,3 +143,58 @@ export const depthFirstSearchVisit = (
     color[u] = Colors.BLACK;
   }
 };
+
+export const DFS = (graph: any) => {
+  const vertices: any = graph.getVertices();
+  const adjList = graph.getAdjList();
+  const color = initializerColor(vertices);
+
+  const d: any = {};
+  const f: any = {};
+  const p: any = {};
+
+  const time = { count: 0 };
+
+  for (let i = 0; i < vertices.length; i++) {
+    f[vertices[i]] = 0;
+    d[vertices[i]] = 0;
+    p[vertices[i]] = null;
+  }
+
+  for (let i = 0; i < vertices.length; i++) {
+    if (color[vertices[i]] === Colors.WHITE) {
+      DFSVisit(vertices[i], color, d, f, p, time, adjList);
+    }
+  }
+
+  return {
+    discovery: d,
+    finished: f,
+    predecessors: p,
+  };
+};
+
+const DFSVisit = (
+  u: any,
+  color: any,
+  d: any,
+  f: any,
+  p: any,
+  time: any,
+  adjList: any,
+) => {
+  color[u] = Colors.GREY;
+  d[u] = ++time.count;
+  const neighbors = adjList.get(u);
+
+  for (let i = 0; i < neighbors.length; i++) {
+    const w = neighbors[i];
+    if (color[w] === Colors.WHITE) {
+      p[w] = u;
+      DFSVisit(w, color, d, f, p, time, adjList);
+    }
+  }
+
+  color[u] = Colors.BLACK;
+  f[u] = ++time.count;
+};

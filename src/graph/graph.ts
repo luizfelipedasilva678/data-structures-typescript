@@ -3,6 +3,7 @@ import {
   breadthFirstSearch,
   breadthFirstSearchV2,
   depthFirstSearch,
+  DFS,
 } from '../utils';
 import Stack from '../stack/stack-array';
 
@@ -100,3 +101,38 @@ for (let i = 1; i < myVertices.length; i++) {
 console.log('-------------------------');
 
 console.log(depthFirstSearch(graph, printVertex));
+
+console.log('-------------------------');
+
+console.log(DFS(graph));
+
+console.log('-------------------------');
+
+const graph2 = new Graph(true);
+const myVertices2 = ['A', 'B', 'C', 'D', 'E', 'F'];
+for (let i = 0; i < myVertices2.length; i++) {
+  graph2.addVertex(myVertices2[i]);
+}
+
+graph2.addEdge('A', 'C');
+graph2.addEdge('A', 'D');
+graph2.addEdge('B', 'D');
+graph2.addEdge('B', 'E');
+graph2.addEdge('C', 'F');
+graph2.addEdge('F', 'E');
+const result = DFS(graph2);
+const fTimes = result.finished;
+let s = '';
+for (let count = 0; count < myVertices2.length; count++) {
+  let max = 0;
+  let maxName: any = null;
+  for (let i = 0; i < myVertices2.length; i++) {
+    if (fTimes[myVertices2[i]] > max) {
+      max = fTimes[myVertices2[i]];
+      maxName = myVertices2[i];
+    }
+  }
+  s += ` - ${maxName}`;
+  delete fTimes[maxName];
+}
+console.log(s);
