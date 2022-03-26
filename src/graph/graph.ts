@@ -1,5 +1,9 @@
 import Dictionary from '../dictionary/dictionary';
-import { breadthFirstSearch, breadthFirstSearchV2 } from '../utils';
+import {
+  breadthFirstSearch,
+  breadthFirstSearchV2,
+  depthFirstSearch,
+} from '../utils';
 import Stack from '../stack/stack-array';
 
 class Graph {
@@ -92,3 +96,7 @@ for (let i = 1; i < myVertices.length; i++) {
   }
   console.log(s);
 }
+
+console.log('-------------------------');
+
+console.log(depthFirstSearch(graph, printVertex));

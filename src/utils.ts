@@ -109,3 +109,37 @@ export const breadthFirstSearchV2 = (graph: any, startVertex: any) => {
     predecessors,
   };
 };
+
+export const depthFirstSearch = (graph: any, callback: any) => {
+  const vertices = graph.getVertices();
+  const adjList = graph.getAdjList();
+  const color = initializerColor(vertices);
+
+  for (let i = 0; i < vertices.length; i++) {
+    if (color[vertices[i]] === Colors.WHITE) {
+      depthFirstSearchVisit(vertices[i], color, adjList, callback);
+    }
+  }
+};
+
+export const depthFirstSearchVisit = (
+  u: any,
+  color: any,
+  adjList: any,
+  callback: any,
+) => {
+  color[u] = Colors.GREY;
+
+  if (callback) {
+    callback(u);
+  }
+
+  const neighbors = adjList.get(u);
+  for (let i = 0; i < neighbors.length; i++) {
+    const w = neighbors[i];
+    if (color[w] === Colors.WHITE) {
+      depthFirstSearchVisit(w, color, adjList, callback);
+    }
+    color[u] = Colors.BLACK;
+  }
+};
