@@ -17,6 +17,22 @@ export const union = (i: any, j: any, parent: any) => {
   return false;
 };
 
+const initializeCost = (graph: any) => {
+  const cost: any = [];
+  const { length } = graph;
+  for (let i = 0; i < length; i++) {
+    cost[i] = [];
+    for (let j = 0; j < length; j++) {
+      if (graph[i][j] === 0) {
+        cost[i][j] = INF;
+      } else {
+        cost[i][j] = graph[i][j];
+      }
+    }
+  }
+  return cost;
+};
+
 const kruskal = (graph: any) => {
   const { length } = graph;
   const parent: any = [];
@@ -25,7 +41,7 @@ const kruskal = (graph: any) => {
   let b;
   let u;
   let v;
-  const cost = initializerCost(graph);
+  const cost = initializeCost(graph);
   while (ne < length - 1) {
     for (let i = 0, min = INF; i < length; i++) {
       for (let j = 0; j < length; j++) {
