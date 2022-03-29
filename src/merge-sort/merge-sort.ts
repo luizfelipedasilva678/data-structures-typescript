@@ -25,7 +25,7 @@ function merge(left: any, right: any, compareFn: any) {
     result.push(
       compareFn(left[i], right[i]) === Compare.LESS_THAN
         ? left[i++]
-        : right[i++],
+        : right[j++],
     );
   }
   return result.concat(i < left.length ? left.slice(i) : right.slice(j));
