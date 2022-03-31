@@ -21,4 +21,4 @@ export function insertionSort(array: any, compareFn = defaultCompare) {
   return array;
 }
 
-console.log('Testando insertion sort', insertionSort(noSortedArray));
+// console.log('Testando insertion sort', insertionSort(noSortedArray));

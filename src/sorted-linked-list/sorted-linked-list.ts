@@ -4,6 +4,7 @@ import { defaultEquals } from '../utils';
 export const Compare = {
   LESS_THAN: -1,
   BIGGER_THAN: 1,
+  EQUALS: 0,
 };
 
 export function defaultCompare<T>(a: T, b: T) {
