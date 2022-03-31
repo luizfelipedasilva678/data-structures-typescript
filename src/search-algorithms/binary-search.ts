@@ -23,7 +23,7 @@ function binarySearch(array: any, value: number, compareFn = defaultCompare) {
   return -1;
 }
 
-function lesserOrEquals(a: any, b: any, compareFn: any) {
+export function lesserOrEquals(a: any, b: any, compareFn: any) {
   const comp = compareFn(a, b);
   return comp === Compare.LESS_THAN || comp === Compare.EQUALS;
 }
